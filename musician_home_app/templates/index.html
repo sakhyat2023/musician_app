@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block content %}
+<div>
+  <h1 class="py-3">List All Musicians and Album</h1>
+  <table class="table align-middle">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Musician Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Album Rating</th>
+        <th scope="col">Instrument Type</th>
+        <th scope="col">Album Name</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <th scope="row">{{post.id}}</th>
+        <td>
+          <a
+            href="{% url 'edit_musician' post.id %}"
+            class="text-body text-decoration-none"
+            >{{post.musician.first_name}} {{post.musician.last_name}}</a
+          >
+        </td>
+        <td>{{post.musician.email}}</td>
+        <td>{{post.rating}}</td>
+        <td>{{post.musician.instrument_type}}</td>
+        <td>{{post.album_name}}</td>
+        <td>{{post.release_date | date:"j-M-Y" }}</td>
+        <td>
+    <a href="{% url 'edit_album' post.id %}" class="btn btn-secondary sm-btn"
+            >Edit</a
+          >
+          <a href="{% url 'delete_album' post.id %}" class="btn btn-danger"
+            >Delete</a
+          > 
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock content %}
